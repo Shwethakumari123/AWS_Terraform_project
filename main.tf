@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = secrets_region
 }
 
 resource "aws_vpc" "main" {
