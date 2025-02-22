@@ -9,14 +9,14 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "subnet_1" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "us-east-1"
+  availability_zone       = "us-east-1a"  # Updated availability zone
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "subnet_2" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "10.0.2.0/24"
-  availability_zone       = "us-east-1"
+  availability_zone       = "us-east-1b"  # Updated availability zone
   map_public_ip_on_launch = true
 }
 
@@ -39,6 +39,7 @@ resource "aws_security_group" "microservice_sg_1" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 resource "aws_security_group" "microservice_sg_2" {
   name        = "microservice_sg_2"
   description = "Allow traffic for microservice 2"
@@ -80,7 +81,7 @@ resource "aws_ecs_task_definition" "microservice_1_task" {
         containerPort = 80
         hostPort      = 80
         protocol      = "tcp"
-              }
+      }
     ]
   }])
 }
@@ -122,7 +123,7 @@ resource "aws_ecs_service" "microservice_1_service" {
 }
 
 resource "aws_ecs_service" "microservice_2_service" {
- name            = "microservice-2-service"
+  name            = "microservice-2-service"
   cluster         = aws_ecs_cluster.microservice_cluster.id
   task_definition = aws_ecs_task_definition.microservice_2_task.arn
   desired_count   = 1
