@@ -19,7 +19,7 @@ jobs:
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          region: "us-east-1"
+          region: ${{ secrets.AWS_REGION }}  # Use the AWS_REGION secret
 
       - name: Build Docker image for Service 1
         run: |
