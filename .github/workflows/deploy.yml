@@ -21,20 +21,20 @@ jobs:
       - name: Build Docker image for Service 1
         run: |
           docker build -t service1 ./service1
-          docker tag service1:latest <aws_account_id>.dkr.ecr.<region>.amazonaws.com/service1:latest
+          docker tag service1:latest <aws_account_id>.dkr.ecr.<us-east-1a>.amazonaws.com/service1:latest
 
       - name: Build Docker image for Service 2
         run: |
           docker build -t service2 ./service2
-          docker tag service2:latest <aws_account_id>.dkr.ecr.<region>.amazonaws.com/service2:latest
+          docker tag service2:latest <aws_account_id>.dkr.ecr.<us-east-1a>.amazonaws.com/service2:latest
 
       - name: Push Docker image for Service 1 to ECR
         run: |
-          docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/service1:latest
+          docker push <aws_account_id>.dkr.ecr.<us-east-1a>.amazonaws.com/service1:latest
 
       - name: Push Docker image for Service 2 to ECR
         run: |
-          docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/service2:latest
+          docker push <aws_account_id>.dkr.ecr.<us-east-1a>.amazonaws.com/service2:latest
 
   deploy:
     runs-on: ubuntu-latest
